@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    </head>
+<body>
+
+<table border="1|0" width="100%">
+  <tr>
+    <th>Задача</th>
+    <th>Статус</th>
+    <th>Действие</th>
+  </tr>
+  <tr>
+    <th>Проверить блейд</th>
+    <th>{{blade_results}}</th>
+    <th><br><br><br><a href="/blade">Recheck</a><br><br><br></th>
+  </tr>
+  <tr>
+    <th>Сканировать</th>
+    <th>{{scan_results}}</th>
+    <th><br><br><br><a href="/scan">Rescan</a><br><br><br></th>
+  </tr>
+  <tr>
+    <th>Соседи</th>
+    <th>{{n_list}}</th>
+    <th><br><br><br><a href="/nscan">Scan</a><br><br><br></th>
+  </tr>
+  <tr>
+    <th>Ловить IMSI</th>
+    <th>{{imsi_status}}</th>
+    <th><br><br><br><a href="/001">0.01 час</a><br>
+      <a href="/1">1 час</a><br>
+      <a href="/2">2 часa</a><br>
+      <a href="/4">4 часа</a><br>
+      <a href="/4">8 часов</a><br></th>
+  </tr>
+  <tr>
+    <th>Перезапустить</th>
+    <th></th>
+    <th><br><br><br><a href="/restart">Restart</a><br><br><br></th>
+  </tr>
+  <tr>
+    <th>Файлы</th>
+    <th>XML файлы</th>
+    <th><br><br><br><a href="/static/example.xlsx">Download</a><br><br><br></th>
+  </tr>
+  <tr>
+    <th>Станция</th>
+    <th>{{bts_status}}</th>
+    <th><br><br><br><a href="/yatebts">Start/stop</a><br><br><br></th>
+  </tr>
+</table>
+
+<script type="text/javascript">   
+  function Redirect() 
+  {  
+      window.location="/"; 
+  } 
+  setTimeout('Redirect()', 3000);
+</script>
+
+</body>
+</html>
