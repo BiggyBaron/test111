@@ -14,6 +14,8 @@ import requests
 import os
 
 
+bts_status = False
+
 path = str(os.path.abspath(os.getcwd()))
 
 
@@ -134,11 +136,14 @@ class Hack:
         self.status = False
     
     def check_blade(self):
-        check = sh.Command("bladeRF-cli")
-        blade = check("-p")
-        if "bladeRF" in blade:
-            return True
-        else:
+        try:
+            check = sh.Command("bladeRF-cli")
+            blade = check("-p")
+            if "bladeRF" in blade:
+                return True
+            else:
+                return False
+        except:
             return False
     
     def stopLive(self):
@@ -212,6 +217,8 @@ def back(val):
 @app.route("/<way>")  # Root for login page is index "/"
 def eval(way=""):
 
+    active_num = active_imsis()
+
     blade_results = engine.state
 
     scan_results = engine.bases
@@ -250,6 +257,10 @@ def eval(way=""):
     if way == "restart":
         reboot = sh.Command("reboot")
         reboot()
+    
+    if way == "shutdown":
+        shut = sh.Command("shutdown")
+        shut("-now")
 
     # LONGS:
     if way == "scan1":
@@ -284,14 +295,45 @@ def eval(way=""):
         time = 8
         engine.catch_imsi(time)
         imsi_status = "Скачивай"
+
+    yate = sh.Command("yate")
+    stopyate = sh.Command("killall")
+
+    if way == "yatebtstart":
+        stopyate("yate", _bg=True, _bg_exc=False)
+        yate(_bg=True, _bg_exc=False)
+        bts_status = True
+    
+    if way == "yatebtstop":
+        stopyate("yate", _bg=True, _bg_exc=False)
+        bts_status = False
+    
+    if way == "yatedel":
+        with open("/usr/local/etc/yate/tmsidata.conf", "w") as file:
+            file.write("")
+        active_num = active_imsis()
     
     return render_template(
         "index.html", **locals())
 
+
+def active_imsis():
+    lines = ""
+    result = ""
+    with open("/usr/local/etc/yate/tmsidata.conf", "r") as file:
+        lines = file.readlines()
+        for line in lines:
+            if "401" in line:
+                result += line.split("=")[0] + ", "
+    
+    if result == "":
+        result = "Нету"
+    return result
 
 if __name__ == "__main__":
     
     df = pd.DataFrame.from_dict([{"Тут":"Ничего нет"}])
     df.to_excel(path + '/templates/example.xlsx')
     
-    app.run(host='0.0.0.0', port=7777) 
+    app.run(host='0.0.0.0', port=7777, debug=True) 
+

@@ -35,11 +35,6 @@
       <a href="/4">8 часов</a><br></th>
   </tr>
   <tr>
-    <th>Перезапустить</th>
-    <th></th>
-    <th><br><br><br><a href="/restart">Restart</a><br><br><br></th>
-  </tr>
-  <tr>
     <th>Файлы</th>
     <th>XML файлы</th>
     <th><br><br><br><a href="/static/example.xlsx">Download</a><br><br><br></th>
@@ -47,7 +42,24 @@
   <tr>
     <th>Станция</th>
     <th>{{bts_status}}</th>
-    <th><br><br><br><a href="/yatebts">Start/stop</a><br><br><br></th>
+    <th><br><br><br><a href="/yatebtstart">Start</a>
+      <br><br><br><a href="/yatebtstop">Stop</a><br><br><br></th>
+  </tr>
+  <tr>
+    <th>IMSI с активного</th>
+    <th>{{active_num}}</th>
+    <th>
+      <br><br><br><a href="/yatedel">Удалить</a><br><br><br></th>
+  </tr>
+  <tr>
+    <th>Перезапустить</th>
+    <th></th>
+    <th><br><br><br><a href="/restart">Restart</a><br><br><br></th>
+  </tr>
+  <tr>
+    <th>Выключить</th>
+    <th></th>
+    <th><br><br><br><a href="/shutdown">Shutdown</a><br><br><br></th>
   </tr>
 </table>
 
