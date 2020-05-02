@@ -16,7 +16,7 @@ import os
 
 bts_status = False
 
-path = str(os.path.abspath(os.getcwd()))
+path = "/home/ubuntu/app"
 
 
 app = Flask(__name__, static_url_path='/static/', 
@@ -260,7 +260,7 @@ def eval(way=""):
     
     if way == "shutdown":
         shut = sh.Command("shutdown")
-        shut("-now")
+        shut("now")
 
     # LONGS:
     if way == "scan1":
@@ -331,6 +331,8 @@ def active_imsis():
     return result
 
 if __name__ == "__main__":
+
+    print(path)
     
     df = pd.DataFrame.from_dict([{"Тут":"Ничего нет"}])
     df.to_excel(path + '/templates/example.xlsx')
